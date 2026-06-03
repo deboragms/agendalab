@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #24549C;
+    font-family: "Lato", sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Container principal */
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Caixa branca */
+
+.content-box {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 1100px;
+
+    padding: 40px 30px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+thead{
+    background-color: #24549C;
+    color: #ffffff;
+}
+
+/* Título */
+
+.title {
+    color: #24549C;
+    font-weight: 900;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Formulário */
+
+.form-group label {
+    color: #24549C;
+    font-weight: 700;
+}
+
+/* Input personalizado */
+
+.custom-input {
+    border: 2px solid #f7941e;
+    border-radius: 6px;
+    height: 45px;
+}
+
+.custom-input:focus {
+    border-color: #24549C;
+    box-shadow: none;
+}
+
+/* Grupo de botões */
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+/* Botão padrão */
+
+.custom-btn {
+    width: 150px;
+    height: 45px;
+
+    background-color: #f7941e;
+
+    border: none;
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+}
+
+.custom-btn:hover {
+    background-color: #db7f12;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Operações */
+
+.operation-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .content-box {
+        padding: 25px 15px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .custom-btn {
+        width: 100%;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}

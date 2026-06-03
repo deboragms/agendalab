@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #24549C;
+    font-family: "Lato", sans-serif;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+
+    padding: 40px 30px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 30px auto;
+
+    width: 180px;
+    max-width: 100%;
+    height: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+label {
+    color: #24549C;
+    font-size: 15px;
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+
+    height: 45px;
+
+    border: 2px solid #f7941e;
+    border-radius: 6px;
+
+    padding: 0 12px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #24549C;
+}
+
+button {
+    width: 100%;
+    height: 45px;
+
+    background-color: #f7941e;
+
+    border: none;
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #db7f12;
+}
+
+.alert {
+    background-color: #ffdddd;
+    color: #c00000;
+
+    padding: 12px;
+
+    border-radius: 6px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 480px) {
+
+    .login-card {
+        padding: 30px 20px;
+    }
+
+    .logo {
+        width: 150px;
+    }
+
+}

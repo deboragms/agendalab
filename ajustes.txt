@@ -1,0 +1,23 @@
+29-05-2026:
+
+Criar um menu de usuários (perguntar ao stakeholder quais as funções liberadas) - Editada: O menu será substituido por navegação direta ao ageselect. - Resolvido.
+Criar duas versões do ageselect (um com calendário com barra de rolagem e outro sem). - Resolvido.
+Modificar a hierarquia dos usuários admin (independente do agendamento ser meu ou não poderá ser feito a edição por parte dos admin). - Resolvido.
+Ponto de atenção: Quando o usuário vier do pop-up (com turno e ambiente selecionado, essas informações devem estar selecionadas no ageinsert). - Resolvido.
+
+01-06-2026:
+
+Editar o ageinsert para que todos os inputs (por excessão, empresa e observação) sejam readonly como o usuário.
+Solicitação da stakeholder (conversar com o sandro)*: Aumentar o tamanho do número das datas.
+Criação de relatório: Inserir uma área de relatório como no doces da vovó.
+Corrigir o login: Login sempre encaminhando para o ageselect (mesmo o admin).
+
+02-06-2026:
+
+Sem validação: Mesmo o usuário não sendo admin, com o botão menu no ageselect, o mesmo consegue ter acesso ao menu.
+
+03-06-2026:
+
+Criação de agendamentos períodicos: Criar uma tela de agendamentos de períodos para laboratórios de uso frequentes de determinados usuários.
+Cadastro de feriados:
+Validação e troca de senha: Criar uma tela de validação da senha inicial padrão 
