@@ -273,18 +273,19 @@ $descricaoturno = $nometurno[$turno] ?? '';
                     $dataok = sprintf('%04d-%02d-%02d', $ano, $mes, $diaAtual);
 
                     $sqldia = 'select 
-                                a.id,
-                                a.obs,
-                                u.nome usuario,
-                                b.nome,
-                                a.data,
-                                a.turno
-                                from al_agenda a
-                                inner join al_ambiente b on b.id=a.idambiente
-                                inner join al_usuario u on u.id=a.idusuario
-                                where a.data = "' . $dataok . '"
-                                and turno ="' . $turno . '"
-                                and b.nome="' . $ambiente['nome'] . '"';
+                            a.id,
+                            a.obs,
+                            u.nome usuario,
+                            u.reduzido,
+                            b.nome,
+                            a.data,
+                            a.turno
+                            from al_agenda a
+                            inner join al_ambiente b on b.id=a.idambiente
+                            inner join al_usuario u on u.id=a.idusuario
+                            where a.data = "' . $dataok . '"
+                            and turno ="' . $turno . '"
+                            and b.nome="' . $ambiente['nome'] . '"';
 
                     $resultsqldia = mysqli_query($con, $sqldia);
 
@@ -303,6 +304,7 @@ $descricaoturno = $nometurno[$turno] ?? '';
 
                     $classeFinal = trim($classeHoje . ' ' . $classeAgendamento);
                     $usuarioagenda = $campodia['usuario'] ?? '';
+                    $usuarioreduzido = $campodia['reduzido'] ?? '';
                     $obs = $campodia['obs'] ?? '';
                     $idagenda = $campodia['id'] ?? '';
 
@@ -320,7 +322,7 @@ $descricaoturno = $nometurno[$turno] ?? '';
                     echo $diaAtual;
 
                     if ($campodia) {
-                        echo '<p>' . $campodia['usuario'] . '</p>';
+                        echo '<p>' . $campodia['reduzido'] . '</p>';
                     }
                     echo "</div>";
                     echo "</td>";
@@ -356,6 +358,11 @@ $descricaoturno = $nometurno[$turno] ?? '';
                         <div class="legend-item">
                             <span class="legend-color" style="background-color: #F4C542;"></span>
                             <span class="legend-text">Outros Usuários</span>
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: #24549C;"></span>
+                            <span class="legend-text">Feriado</span>
                         </div>
 
                     </div>';

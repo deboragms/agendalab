@@ -6,8 +6,8 @@ $pesqnome = '';
 
 if (isset($_POST['submit'])) {
     $pesqnome = $_POST['pesqnome'];
-    $sql = $sql . ' and nome like "%' . $pesqnome . '%"';
-
+    $reduzido = $_POST['reduzido'];
+    $sql = $sql . ' and nome like "%' . $pesqnome . '%" and reduzido = "' . $reduzido . '"';
 }
 ?>
 
@@ -67,6 +67,7 @@ if (isset($_POST['submit'])) {
                         <tr>
                             <th>ID</th>
                             <th>Usuário</th>
+                            <th>Reduzido</th>
                             <th>Email</th>
                             <th>Operações</th>
                         </tr>
@@ -86,6 +87,8 @@ if (isset($_POST['submit'])) {
                                     <th scope="row">' . $row['id'] . '</th>
 
                                     <td>' . $row['nome'] . '</td>
+
+                                    <td>' . $row['reduzido'] . '</td>
 
                                     <td>' . $row['email'] . '</td>
 

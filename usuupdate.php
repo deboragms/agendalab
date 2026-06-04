@@ -7,6 +7,8 @@ $row = mysqli_fetch_assoc($result);
 $nome = $row['nome'];
 $email = $row['email'];
 $senha = $row['senha'];
+$reduzido = $row['reduzido'];
+
 
 
 if (isset($_POST['submit'])) {
@@ -14,11 +16,13 @@ if (isset($_POST['submit'])) {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
+    $reduzido = $_POST['reduzido'];
 
     $sql = 'update al_usuario
             set nome ="' . $nome . '"
             , email ="' . $email . '"
             , senha ="' . $senha . '"
+            , reduzido = "' . $reduzido . '"
             where id=' . $id;
 
     $result = mysqli_query($con, $sql);
@@ -68,6 +72,19 @@ if (isset($_POST['submit'])) {
                         class="form-control custom-input"
                         name="nome"
                         value="<?php echo $nome; ?>"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Reduzido</label>
+
+                    <input
+                        type="text"
+                        class="form-control custom-input"
+                        name="reduzido"
+                        value="<?php echo $reduzido; ?>"
                         required>
 
                 </div>
