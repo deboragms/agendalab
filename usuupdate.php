@@ -8,6 +8,7 @@ $nome = $row['nome'];
 $email = $row['email'];
 $senha = $row['senha'];
 $reduzido = $row['reduzido'];
+$admin = $row['master'];
 
 
 
@@ -23,6 +24,7 @@ if (isset($_POST['submit'])) {
             , email ="' . $email . '"
             , senha ="' . $senha . '"
             , reduzido = "' . $reduzido . '"
+            , master = "' . $admin . '"
             where id=' . $id;
 
     $result = mysqli_query($con, $sql);
@@ -114,6 +116,21 @@ if (isset($_POST['submit'])) {
                         required>
 
                 </div>
+
+                <div class="form-group">
+
+                    <label for="master">Administrador:</label>
+
+                    <select
+                        name="master"
+                        id="master"
+                        class="form-control custom-input custom-select"
+                        required>
+
+                        <option value="0">Não</option>
+                        <option value="1">Sim</option>
+
+                    </select>
 
                 <div class="button-group">
 

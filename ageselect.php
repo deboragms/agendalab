@@ -7,17 +7,14 @@ include('connect.php');
 $usuariologado = $_SESSION['nome'] ?? '';
 $admin = $_SESSION['master'] ?? '';
 
-$mes = (int)($_POST['mes'] ?? date('m'));
-$ano = (int)($_POST['ano'] ?? date('Y'));
-
-$turno = $_POST['turno'] ?? '';
-
-$ambienteselecionado = $_POST['ambiente'] ?? '';
+$mes = $_POST['mes'] ?? $_SESSION['mes'] ?? date('m');
+$ano = $_POST['ano'] ?? $_SESSION['ano'] ?? date('Y');
+$turno = $_POST['turno'] ?? $_SESSION['turno'] ?? '';
+$ambienteselecionado = $_POST['ambiente'] ?? $_SESSION['ambiente'] ?? '';
 
 $sqlamb = 'select * from al_ambiente';
 
 if ($ambienteselecionado != '') {
-
     $sqlamb .= " where nome='" . $ambienteselecionado . "'";
 }
 
@@ -46,7 +43,6 @@ $nometurno = [
 ];
 
 $descricaomes = $nomemes[$mes] ?? '';
-
 $descricaoturno = $nometurno[$turno] ?? '';
 ?>
 
@@ -71,7 +67,6 @@ $descricaoturno = $nometurno[$turno] ?? '';
 </head>
 
 <body>
-
     <div class="page-container">
 
         <div class="content-box">
@@ -92,9 +87,7 @@ $descricaoturno = $nometurno[$turno] ?? '';
                             <?php
 
                             for ($i = 1; $i <= 12; $i++) {
-
                                 $selected = ($mes == $i) ? 'selected' : '';
-
                                 echo '<option value="' . $i . '" ' . $selected . '>' . $nomemes[$i] . '</option>';
                             }
 
@@ -118,9 +111,7 @@ $descricaoturno = $nometurno[$turno] ?? '';
                             $anoatual = date('Y');
 
                             for ($i = $anoatual; $i <= $anoatual + 1; $i++) {
-
                                 $selected = ($ano == $i) ? 'selected' : '';
-
                                 echo '<option value="' . $i . '" ' . $selected . '>' . $i . '</option>';
                             }
 
@@ -193,9 +184,11 @@ $descricaoturno = $nometurno[$turno] ?? '';
                         Consultar
                     </button>
 
-                    <a href="menu.php" class="custom-btn">
-                        Menu
-                    </a>
+                    <?php
+                    if ($admin == 1) {
+                        echo '<a href="menu.php" class="custom-btn">Menu</a>';
+                    }
+                    ?>
 
                     <a href="index.php" class="custom-btn">
                         Voltar
@@ -207,30 +200,33 @@ $descricaoturno = $nometurno[$turno] ?? '';
 
             <?php
 
-            $resultamb = mysqli_query($con, $sqlamb);
-            while ($ambiente = mysqli_fetch_assoc($resultamb)) {
+            if ($turno != '') {
 
-                echo '<div class="environment-block">';
+                $resultamb = mysqli_query($con, $sqlamb);
 
-                echo '<h2 class="environment-title">';
-                echo $ambiente['nome'];
-                echo '</h2>';
+                while ($ambiente = mysqli_fetch_assoc($resultamb)) {
 
-                $primeiroDiaTimestamp = mktime(0, 0, 0, $mes, 1, $ano);
+                    echo '<div class="environment-block">';
 
-                $diasNoMes = date('t', $primeiroDiaTimestamp);
+                    echo '<h2 class="environment-title">';
+                    echo $ambiente['nome'];
+                    echo '</h2>';
 
-                $diaSemanaComeca = date('w', $primeiroDiaTimestamp);
+                    $primeiroDiaTimestamp = mktime(0, 0, 0, $mes, 1, $ano);
 
-                echo "<h3>";
-                echo $descricaomes . " / " . $ano . " - " . $descricaoturno;
-                echo "</h3>";
+                    $diasNoMes = date('t', $primeiroDiaTimestamp);
 
-                echo "<div class='calendar-wrapper'>";
+                    $diaSemanaComeca = date('w', $primeiroDiaTimestamp);
 
-                echo "<table>";
+                    echo "<h3>";
+                    echo $descricaomes . " / " . $ano . " - " . $descricaoturno;
+                    echo "</h3>";
 
-                echo "
+                    echo "<div class='calendar-wrapper'>";
+
+                    echo "<table>";
+
+                    echo "
                 <tr>
                     <th>Dom</th>
                     <th>Seg</th>
@@ -242,37 +238,37 @@ $descricaoturno = $nometurno[$turno] ?? '';
                 </tr>
                 ";
 
-                echo "<tr>";
+                    echo "<tr>";
 
-                for ($i = 0; $i < $diaSemanaComeca; $i++) {
+                    for ($i = 0; $i < $diaSemanaComeca; $i++) {
 
-                    echo "<td></td>";
-                }
-
-                $diaAtual = 1;
-
-                while ($diaAtual <= $diasNoMes) {
-
-                    if (($diaSemanaComeca + $diaAtual - 1) % 7 == 0 && $diaAtual != 1) {
-                        echo "</tr><tr>";
+                        echo "<td></td>";
                     }
 
-                    $classeHoje =
-                        (
-                            $diaAtual == date('j')
-                            &&
-                            $mes == date('n')
-                            &&
-                            $ano == date('Y')
-                        )
-                        ?
-                        'hoje'
-                        :
-                        '';
+                    $diaAtual = 1;
 
-                    $dataok = sprintf('%04d-%02d-%02d', $ano, $mes, $diaAtual);
+                    while ($diaAtual <= $diasNoMes) {
 
-                    $sqldia = 'select 
+                        if (($diaSemanaComeca + $diaAtual - 1) % 7 == 0 && $diaAtual != 1) {
+                            echo "</tr><tr>";
+                        }
+
+                        $classeHoje =
+                            (
+                                $diaAtual == date('j')
+                                &&
+                                $mes == date('n')
+                                &&
+                                $ano == date('Y')
+                            )
+                            ?
+                            'hoje'
+                            :
+                            '';
+
+                        $dataok = sprintf('%04d-%02d-%02d', $ano, $mes, $diaAtual);
+
+                        $sqldia = 'select 
                             a.id,
                             a.obs,
                             u.nome usuario,
@@ -287,28 +283,28 @@ $descricaoturno = $nometurno[$turno] ?? '';
                             and turno ="' . $turno . '"
                             and b.nome="' . $ambiente['nome'] . '"';
 
-                    $resultsqldia = mysqli_query($con, $sqldia);
+                        $resultsqldia = mysqli_query($con, $sqldia);
 
-                    $campodia = mysqli_fetch_assoc($resultsqldia);
+                        $campodia = mysqli_fetch_assoc($resultsqldia);
 
-                    $classeAgendamento = '';
+                        $classeAgendamento = '';
 
-                    if ($campodia) {
+                        if ($campodia) {
 
-                        if ($campodia['usuario'] == $usuariologado) {
-                            $classeAgendamento = 'meu-agendamento';
-                        } else {
-                            $classeAgendamento = 'agendamento-outro';
+                            if ($campodia['usuario'] == $usuariologado) {
+                                $classeAgendamento = 'meu-agendamento';
+                            } else {
+                                $classeAgendamento = 'agendamento-outro';
+                            }
                         }
-                    }
 
-                    $classeFinal = trim($classeHoje . ' ' . $classeAgendamento);
-                    $usuarioagenda = $campodia['usuario'] ?? '';
-                    $usuarioreduzido = $campodia['reduzido'] ?? '';
-                    $obs = $campodia['obs'] ?? '';
-                    $idagenda = $campodia['id'] ?? '';
+                        $classeFinal = trim($classeHoje . ' ' . $classeAgendamento);
+                        $usuarioagenda = $campodia['usuario'] ?? '';
+                        $usuarioreduzido = $campodia['reduzido'] ?? '';
+                        $obs = $campodia['obs'] ?? '';
+                        $idagenda = $campodia['id'] ?? '';
 
-                    echo '<td
+                        echo '<td
                             class="' . $classeFinal . ' calendar-day"
                             data-usuario="' . htmlspecialchars($usuarioagenda) . '"
                             data-obs="' . htmlspecialchars($obs) . '"
@@ -316,34 +312,37 @@ $descricaoturno = $nometurno[$turno] ?? '';
                             data-id="' . $idagenda . '"
                             data-agendamento="' . ($campodia ? '1' : '0') . '"
                             data-meu="' . ($usuarioagenda == $usuariologado ? '1' : '0') . '"
+                            data-data="' . $dataok . '"
+                            data-turno="' . $turno . '"
+                            data-ambiente="' . htmlspecialchars($ambiente['nome']) . '"
                           >';
 
-                    echo "<div class='day-number'>";
-                    echo $diaAtual;
+                        echo "<div class='day-number'>";
+                        echo $diaAtual;
 
-                    if ($campodia) {
-                        echo '<p>' . $campodia['reduzido'] . '</p>';
+                        if ($campodia) {
+                            echo '<p>' . $campodia['reduzido'] . '</p>';
+                        }
+                        echo "</div>";
+                        echo "</td>";
+
+                        $diaAtual++;
                     }
+
+                    while (($diaSemanaComeca + $diaAtual - 1) % 7 != 0) {
+
+                        echo "<td></td>";
+
+                        $diaAtual++;
+                    }
+
+                    echo "</tr>";
+
+                    echo "</table>";
+
                     echo "</div>";
-                    echo "</td>";
 
-                    $diaAtual++;
-                }
-
-                while (($diaSemanaComeca + $diaAtual - 1) % 7 != 0) {
-
-                    echo "<td></td>";
-
-                    $diaAtual++;
-                }
-
-                echo "</tr>";
-
-                echo "</table>";
-
-                echo "</div>";
-
-                echo '<div class="calendar-legend">
+                    echo '<div class="calendar-legend">
 
                         <div class="legend-item">
                             <span class="legend-color" style="background-color: #f7941e;"></span>
@@ -367,7 +366,8 @@ $descricaoturno = $nometurno[$turno] ?? '';
 
                     </div>';
 
-                echo '</div>';
+                    echo '</div>';
+                }
             }
 
             ?>
@@ -406,6 +406,8 @@ $descricaoturno = $nometurno[$turno] ?? '';
                 const idagenda = this.dataset.id;
                 const agendamento = this.dataset.agendamento;
                 const meu = this.dataset.meu;
+                const turno = this.dataset.turno;
+                const ambiente = this.dataset.ambiente;
 
                 let html = '';
 
@@ -418,9 +420,7 @@ $descricaoturno = $nometurno[$turno] ?? '';
                             <hr>
                             <p>Deseja realizar um agendamento?</p>
 
-                            <a href="ageinsert.php?data=${data}" class="custom-btn">
-                                Agendar
-                            </a>
+                            <a href="ageinsert.php?data=${data}&turno=${turno}&ambiente=${encodeURIComponent(ambiente)}" class="custom-btn">Agendar</a>
 
                         </div>
                     `;

@@ -2,6 +2,7 @@
 session_start();
 include('connect.php');
 
+
 if (empty($_POST['email']) || empty($_POST['senha'])) {
     $_SESSION['vazios'] = true;
     header('Location: index.php');
@@ -22,6 +23,11 @@ if ($linha == 1) {
     $_SESSION['nome'] = $usuario['nome'];
     $_SESSION['email'] = $usuario['email'];
     $_SESSION['master'] = $usuario['master'];
+
+    if ($senha == "123") {
+        header('Location: troca_senha.php');
+        exit();
+    }
 
     if ($usuario['master'] == 1) {
         header('Location: menu.php');

@@ -65,12 +65,18 @@ include('connect.php');
                         required>
                 </div>
 
-                <button type="submit">
+                <button type=" submit">
                     Conectar
                 </button>
 
-            </form>
+                <!-- <div class="form-group a">
+                
+                <a href="troca_senha.php" style="margin-left: 90px; margin-top: 15px;">Esqueceu sua senha?</a>
 
+                </div> -->
+
+            </form>
+            
         </div>
 
     </div>

@@ -122,6 +122,12 @@ button:hover {
     font-size: 14px;
 }
 
+.form-group a {
+    font-family: "Lato", sans-serif;
+    font-weight: bolder;
+    color: #24549C;
+}
+
 /* RESPONSIVIDADE */
 
 @media (max-width: 480px) {
