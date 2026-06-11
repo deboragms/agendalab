@@ -7,9 +7,19 @@ include('connect.php');
 $usuariologado = $_SESSION['nome'] ?? '';
 $admin = $_SESSION['master'] ?? '';
 
+$sqlusuario = 'select turnopreferido
+               from al_usuario
+               where nome="' . $usuariologado . '"';
+
+$resultusuario = mysqli_query($con, $sqlusuario);
+
+$campousuario = mysqli_fetch_assoc($resultusuario);
+
+$turnopreferido = $campousuario['turnopreferido'] ?? '';
+
 $mes = $_POST['mes'] ?? $_SESSION['mes'] ?? date('m');
 $ano = $_POST['ano'] ?? $_SESSION['ano'] ?? date('Y');
-$turno = $_POST['turno'] ?? $_SESSION['turno'] ?? '';
+$turno = $_POST['turno'] ?? $_SESSION['turno'] ?? $turnopreferido;
 $ambienteselecionado = $_POST['ambiente'] ?? $_SESSION['ambiente'] ?? '';
 
 $sqlamb = 'select * from al_ambiente';
@@ -44,6 +54,8 @@ $nometurno = [
 
 $descricaomes = $nomemes[$mes] ?? '';
 $descricaoturno = $nometurno[$turno] ?? '';
+
+$consultou = isset($_POST['turno']) || !empty($_SESSION['consultou']);
 ?>
 
 <!DOCTYPE html>
@@ -200,7 +212,7 @@ $descricaoturno = $nometurno[$turno] ?? '';
 
             <?php
 
-            if ($turno != '') {
+            if ($consultou) {
 
                 $resultamb = mysqli_query($con, $sqlamb);
 

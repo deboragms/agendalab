@@ -7,10 +7,12 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $reduzido = $_POST['reduzido'];
+    $turnopreferido = $_POST['turnopreferido'];
     $master = $_POST['master'];
+    
 
-    $sql = 'insert into al_usuario (nome, email, senha, reduzido, master)
-            values ("' . $nome . '", "' . $email . '", "' . $senha . '", "' . $reduzido . '", "' . $master . '")';
+    $sql = 'insert into al_usuario (nome, email, senha, reduzido, turnopreferido, master)
+            values ("' . $nome . '", "' . $email . '", "' . $senha . '", "' . $reduzido . '", "' . $turnopreferido .'", "' . $master . '")';
 
     $result = mysqli_query($con, $sql);
 
@@ -105,6 +107,25 @@ if (isset($_POST['submit'])) {
                     </select>
 
                 </div>
+
+                <select
+                            name="turnopreferido"
+                            class="form-control custom-input custom-select"
+                            required>
+
+                            <option value="M" <?= $turnopreferido == 'M' ? 'selected' : '' ?>>
+                                Matutino
+                            </option>
+
+                            <option value="V" <?= $turnopreferido == 'V' ? 'selected' : '' ?>>
+                                Vespertino
+                            </option>
+
+                            <option value="N" <?= $turnopreferido == 'N' ? 'selected' : '' ?>>
+                                Noturno
+                            </option>
+
+                        </select>
                 <div class="button-group">
 
                     <button type="submit" name="submit" class="custom-btn">

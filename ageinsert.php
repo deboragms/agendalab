@@ -68,6 +68,8 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($con, $sql);
 
     if ($result) {
+        $_SESSION['consultou'] = true;
+
 
         $mes = date('m', strtotime($data));
         $ano = date('Y', strtotime($data));

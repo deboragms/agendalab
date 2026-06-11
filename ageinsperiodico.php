@@ -1,1 +1,1 @@
-<!--  -->
+<!-- Fazer uma tela semelhante as comandas do barpad, várias linhas e envia somente as preenchidas -->

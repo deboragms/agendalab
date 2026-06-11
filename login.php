@@ -24,6 +24,14 @@ if ($linha == 1) {
     $_SESSION['email'] = $usuario['email'];
     $_SESSION['master'] = $usuario['master'];
 
+    // Limpa as informações para que o botão consultar e turno preferido não se sobreponham.
+
+    unset($_SESSION['mes']);
+    unset($_SESSION['ano']);
+    unset($_SESSION['turno']);
+    unset($_SESSION['ambiente']);
+    unset($_SESSION['consultou']);
+
     if ($senha == "123") {
         header('Location: troca_senha.php');
         exit();
@@ -35,7 +43,6 @@ if ($linha == 1) {
         header('Location: ageselect.php');
     }
     exit();
-
 } else {
     $_SESSION['nao_autenticado'] = true;
 
