@@ -24,31 +24,37 @@ include('verifica_login.php');
         <div class="jumbotron menu-box">
             <div class="row justify-content-center">
 
-                <div class="col-6 col-lg-3 mb-4">
+                <div class="col-6 col-lg-2 mb-4">
                     <a href="ageselect.php" class="menu-item">
                         <img src="assets/img/calendario.png" alt="Agendamentos" class="menu-img img-fluid">
                         <span class="menu-label">Agendamentos</span>
                     </a>
                 </div>
 
-                <div class="col-6 col-lg-3 mb-4">
+                <div class="col-6 col-lg-2 mb-4">
                     <a href="ususelect.php" class="menu-item">
                         <img src="assets/img/usuario.png" alt="Usuários" class="menu-img img-fluid">
                         <span class="menu-label">Usuários</span>
                     </a>
                 </div>
 
-                <div class="col-6 col-lg-3 mb-4">
+                <div class="col-6 col-lg-2 mb-4">
                     <a href="empselect.php" class="menu-item">
                         <img src="assets/img/empresa.png" alt="Empresas" class="menu-img img-fluid">
                         <span class="menu-label">Empresas</span>
                     </a>
                 </div>
 
-                <div class="col-6 col-lg-3 mb-4">
+                <div class="col-6 col-lg-2 mb-4">
                     <a href="ambselect.php" class="menu-item">
                         <img src="assets/img/sala.png" alt="Ambientes" class="menu-img img-fluid">
                         <span class="menu-label">Ambientes</span>
+                    </a>
+                </div>
+                <div class="col-6 col-lg-2 mb-4">
+                    <a href="ferselect.php" class="menu-item">
+                        <img src="assets/img/feriado.png" alt="Ambientes" class="menu-img img-fluid">
+                        <span class="menu-label">Feriados</span>
                     </a>
                 </div>
                 <div class="col-12 text-center mt-3">

@@ -215,18 +215,6 @@ form {
     text-decoration: none;
 }
 
-/* CALENDÁRIO */
-
-/* .calendar-wrapper {
-    margin-top: 20px;
-
-    overflow-x: auto;
-
-    -webkit-overflow-scrolling: touch;
-
-    border-radius: 8px;
-} */
-
 
 /* Versão sem barra horizontal */
 .calendar-wrapper {
@@ -235,18 +223,6 @@ form {
     border-radius: 8px;
 }
 
-
-/* TABELA */
-
-/* table {
-    width: 100%;
-    min-width: 900px;
-    border-collapse: collapse;
-    table-layout: fixed;
-    background-color: #ffffff;
-    border-radius: 8px;
-    overflow: hidden;
-} */
 
 /* Versão sem barra horizontal */
 table {
@@ -275,6 +251,10 @@ th {
 
 /* DIAS */
 
+.feriado {
+    background-color: #24549C !important;
+}
+
 td {
     height: 110px;
 
@@ -291,19 +271,6 @@ td {
     overflow: hidden;
 }
 
-
-/* Versão sem barra horizontal
-td {
-    height: 80px;
-    background-color: #f5f5dc;
-    vertical-align: top;
-    font-size: 16px;
-    padding: 6px;
-    border: 1px solid #dcdcdc;
-
-
-} */
-
 /* HOVER */
 
 td:hover {
@@ -313,7 +280,7 @@ td:hover {
 /* DIA ATUAL */
 
 .hoje {
-    background-color: #f7941e !important;
+    background-color: #f7941e ;
 
     color: #ffffff;
 }
@@ -522,110 +489,6 @@ td:hover {
     }
 }
 
-/* MOBILE */
-
-/* @media (max-width: 768px) {
-
-    body {
-        padding: 10px;
-    }
-
-    .page-container {
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .content-box {
-        padding: 20px 15px;
-
-        border-radius: 10px;
-    }
-
-    .filter-row {
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 15px;
-    }
-
-    .form-group {
-        width: 100%;
-    }
-
-    .custom-input,
-    .custom-select {
-        width: 100%;
-    }
-
-    .button-group {
-        flex-direction: column;
-
-        gap: 10px;
-    }
-
-    .custom-btn {
-        width: 100%;
-    }
-
-    .environment-block {
-        margin-top: 35px;
-    }
-
-    .environment-title {
-        font-size: 18px;
-
-        padding: 10px;
-
-        margin-bottom: 20px;
-    }
-
-    h3 {
-        font-size: 18px;
-    }
-
-    table {
-        min-width: 700px;
-    }
-
-    th {
-        padding: 10px;
-
-        font-size: 13px;
-    }
-
-    td {
-        height: 65px;
-
-        padding: 4px;
-
-        font-size: 13px;
-    }
-
-    .day-number {
-        font-size: 14px;
-    }
-
-    .event {
-        font-size: 10px;
-
-        padding: 3px 4px;
-    }
-
-     .calendar-legend {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .legend-text {
-        font-size: 16px;
-    }
-
-    .legend-color {
-        width: 24px;
-        height: 24px;
-    }
-} */
 
 /* Versão sem barra horizontal */
 @media (max-width: 768px) {

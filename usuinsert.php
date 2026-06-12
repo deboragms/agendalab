@@ -1,6 +1,8 @@
 <?php
 include('connect.php');
 
+$turnopreferido = '';
+
 if (isset($_POST['submit'])) {
 
     $nome = $_POST['nome'];
@@ -9,10 +11,10 @@ if (isset($_POST['submit'])) {
     $reduzido = $_POST['reduzido'];
     $turnopreferido = $_POST['turnopreferido'];
     $master = $_POST['master'];
-    
+
 
     $sql = 'insert into al_usuario (nome, email, senha, reduzido, turnopreferido, master)
-            values ("' . $nome . '", "' . $email . '", "' . $senha . '", "' . $reduzido . '", "' . $turnopreferido .'", "' . $master . '")';
+            values ("' . $nome . '", "' . $email . '", "' . $senha . '", "' . $reduzido . '", "' . $turnopreferido . '", "' . $master . '")';
 
     $result = mysqli_query($con, $sql);
 
@@ -108,24 +110,31 @@ if (isset($_POST['submit'])) {
 
                 </div>
 
-                <select
-                            name="turnopreferido"
-                            class="form-control custom-input custom-select"
-                            required>
+                <div class="form-group">
 
-                            <option value="M" <?= $turnopreferido == 'M' ? 'selected' : '' ?>>
-                                Matutino
-                            </option>
+                    <label for="">Turno Preferido:</label>
 
-                            <option value="V" <?= $turnopreferido == 'V' ? 'selected' : '' ?>>
-                                Vespertino
-                            </option>
+                    <select
+                        name="turnopreferido"
+                        class="form-control custom-input custom-select"
+                        required>
 
-                            <option value="N" <?= $turnopreferido == 'N' ? 'selected' : '' ?>>
-                                Noturno
-                            </option>
+                        <option value="M" <?= $turnopreferido == 'M' ? 'selected' : '' ?>>
+                            Matutino
+                        </option>
 
-                        </select>
+                        <option value="V" <?= $turnopreferido == 'V' ? 'selected' : '' ?>>
+                            Vespertino
+                        </option>
+
+                        <option value="N" <?= $turnopreferido == 'N' ? 'selected' : '' ?>>
+                            Noturno
+                        </option>
+
+                    </select>
+                </div>
+
+
                 <div class="button-group">
 
                     <button type="submit" name="submit" class="custom-btn">

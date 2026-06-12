@@ -8,9 +8,8 @@ $nome = $row['nome'];
 $email = $row['email'];
 $senha = $row['senha'];
 $reduzido = $row['reduzido'];
+$turnopreferido = $row['turnopreferido'];
 $admin = $row['master'];
-
-
 
 if (isset($_POST['submit'])) {
 
@@ -24,6 +23,7 @@ if (isset($_POST['submit'])) {
             , email ="' . $email . '"
             , senha ="' . $senha . '"
             , reduzido = "' . $reduzido . '"
+            , turnopreferido = "' . $turnopreferido . '"
             , master = "' . $admin . '"
             where id=' . $id;
 
@@ -131,6 +131,31 @@ if (isset($_POST['submit'])) {
                         <option value="1">Sim</option>
 
                     </select>
+                </div>
+
+                <div class="form-group">
+
+                    <label for="">Turno Preferido:</label>
+
+                    <select
+                        name="turnopreferido"
+                        class="form-control custom-input custom-select"
+                        required>
+
+                        <option value="M" <?= $turnopreferido == 'M' ? 'selected' : '' ?>>
+                            Matutino
+                        </option>
+
+                        <option value="V" <?= $turnopreferido == 'V' ? 'selected' : '' ?>>
+                            Vespertino
+                        </option>
+
+                        <option value="N" <?= $turnopreferido == 'N' ? 'selected' : '' ?>>
+                            Noturno
+                        </option>
+
+                    </select>
+                </div>
 
                 <div class="button-group">
 

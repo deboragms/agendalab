@@ -202,6 +202,10 @@ $consultou = isset($_POST['turno']) || !empty($_SESSION['consultou']);
                     }
                     ?>
 
+                    <!-- <a href="relagenda.php" class="custom-btn">
+                        Meus agendamentos
+                    </a> -->
+
                     <a href="index.php" class="custom-btn">
                         Voltar
                     </a>
@@ -280,6 +284,12 @@ $consultou = isset($_POST['turno']) || !empty($_SESSION['consultou']);
 
                         $dataok = sprintf('%04d-%02d-%02d', $ano, $mes, $diaAtual);
 
+                        $sqlferiado = 'select * from al_feriado where data="' . $dataok . '"';
+
+                        $resultferiado = mysqli_query($con, $sqlferiado);
+                        $campoferiado = mysqli_fetch_assoc($resultferiado);
+
+
                         $sqldia = 'select 
                             a.id,
                             a.obs,
@@ -300,6 +310,11 @@ $consultou = isset($_POST['turno']) || !empty($_SESSION['consultou']);
                         $campodia = mysqli_fetch_assoc($resultsqldia);
 
                         $classeAgendamento = '';
+                        $classeFeriado = '';
+
+                        if ($campoferiado) {
+                            $classeFeriado = 'feriado';
+                        }
 
                         if ($campodia) {
 
@@ -310,7 +325,10 @@ $consultou = isset($_POST['turno']) || !empty($_SESSION['consultou']);
                             }
                         }
 
-                        $classeFinal = trim($classeHoje . ' ' . $classeAgendamento);
+                        $classeFinal = trim(
+                            $classeHoje . ' ' . $classeAgendamento . ' ' . $classeFeriado
+                        );
+
                         $usuarioagenda = $campodia['usuario'] ?? '';
                         $usuarioreduzido = $campodia['reduzido'] ?? '';
                         $obs = $campodia['obs'] ?? '';
@@ -318,6 +336,8 @@ $consultou = isset($_POST['turno']) || !empty($_SESSION['consultou']);
 
                         echo '<td
                             class="' . $classeFinal . ' calendar-day"
+                            data-feriado="' . ($campoferiado ? '1' : '0') . '"
+                            data-nomeferiado="' . htmlspecialchars($campoferiado['nome'] ?? '') . '"
                             data-usuario="' . htmlspecialchars($usuarioagenda) . '"
                             data-obs="' . htmlspecialchars($obs) . '"
                             data-data="' . $dataok . '"
@@ -420,10 +440,26 @@ $consultou = isset($_POST['turno']) || !empty($_SESSION['consultou']);
                 const meu = this.dataset.meu;
                 const turno = this.dataset.turno;
                 const ambiente = this.dataset.ambiente;
+                const feriado = this.dataset.feriado;
+                const nomeferiado = this.dataset.nomeferiado;
 
                 let html = '';
 
-                if (agendamento == '0') {
+                if (feriado == '1') {
+
+                    html += `
+                            <div class="alert alert-warning fade show">
+
+                            <h4>Feriado</h4>
+                            <hr>
+
+                            <p><strong>${nomeferiado}</strong></p>
+                            <p>Não é possível realizar agendamentos nesta data.</p>
+
+                            </div>
+                            `;
+
+                } else if (agendamento == '0') {
 
                     html += `
                         <div class="alert alert-warning fade show">
